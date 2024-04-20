@@ -9,8 +9,8 @@ screen = pygame.display.set_mode(size)
 speed = [0, 0]
 
 background = pygame.image.load(r"back1.jpg")
-background1 = pygame.image.load(r"simple_shoot_em_up-main\2nd.png")
-background2 = pygame.image.load(r"simple_shoot_em_up-main\3rd.png")
+background1 = pygame.image.load(r"date\2nd.png")
+background2 = pygame.image.load(r"date\3rd.png")
 background = pygame.transform.scale(background, (800, 550))
 bg_y_pos = 0
 bg_2_y_pos = background.get_height()
@@ -25,7 +25,7 @@ class MainCharacter(pygame.sprite.Sprite):
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(r"simple_shoot_em_up-main\spaceship.png")
+        self.image = pygame.image.load(r"date\spaceship.png")
         self.image = pygame.transform.scale(self.image, (50, 50))
         self.rect = self.image.get_rect()
         self.rect.center = (250, 250)
@@ -151,10 +151,10 @@ while True:
             sys.exit()
 
     else:
-        if score < 300:
+        if score < 200:
             screen.blit(background, (0, bg_y_pos))
             screen.blit(background, (0, bg_2_y_pos))
-        elif score >= 300 and score <= 700:
+        elif score >= 200 and score <= 500:
             screen.blit(background1, (0, bg_y_pos))
             screen.blit(background1, (0, bg_2_y_pos))
         else:
@@ -225,7 +225,18 @@ while True:
         elif score >= 200 and score < 500:
             score_text = my_font.render("Score: " + str(score) + " Level 2", 1, (0, 0, 0))
             screen.blit(score_text, (30, 30))
-
+        elif score > 500 and score < 700:
+            score_text = my_font.render("Score: " + str(score) + " Level 3", 1, (0, 0, 0))
+            screen.blit(score_text, (30, 30))
+            
+        if score >= 500:
+            title_font = pygame.font.SysFont("Times New Roman", 50)
+            win_text = title_font.render("You won!", 1, (0, 0, 0))
+            screen.blit(win_text, (250, 250))
+            pygame.display.flip()
+            pygame.time.wait(2000)  # Ждем 2 секунды перед завершением игры
+            pygame.quit()
+            sys.exit()
 
 
     pygame.display.flip()
